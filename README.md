@@ -1,0 +1,36 @@
+gulp-gulp
+=========
+
+> A [gulp](https://github.com/gulpjs/gulp) plugin to run other gulps.
+
+## Usage
+
+Initially, install `gulp-gulp` as a development dependency:
+
+```shell
+npm install --save-dev gulp-gulp
+```
+
+Then, create task using `gulp-gulp`, which might look similar as below:
+
+```javascript
+'use strict';
+
+var gulp = require('gulp');
+var gulpGulp = require('gulp-gulp');
+
+gulp.task('gulp', function() {
+  return gulp.src('./**/*/gulpfile.js')
+    .pipe(gulpGulp());
+});
+```
+
+Finally, fire gulp task:
+
+```shell
+gulp gulp
+```
+
+## License
+
+[MIT License](http://en.wikipedia.org/wiki/MIT_License)
