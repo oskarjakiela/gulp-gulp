@@ -1,0 +1,27 @@
+{
+  "name": "gulp-gulp",
+  "version": "0.0.1",
+  "description": "A gulp plugin to run other gulps.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/oskarjakiela/gulp-gulp.git"
+  },
+  "keywords": [
+    "gulp",
+    "gulpplugin"
+  ],
+  "author": "Oskar S. Jakieła <oskar@jakiela.pl>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/oskarjakiela/gulp-gulp/issues"
+  },
+  "homepage": "https://github.com/oskarjakiela/gulp-gulp",
+  "dependencies": {
+    "gulp-util": "^3.0.1",
+    "map-stream": "^0.1.0"
+  }
+}

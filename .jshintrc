@@ -1,0 +1,26 @@
+{
+  "maxerr"        : 50,
+
+  "bitwise"       : true,
+  "camelcase"     : true,
+  "curly"         : true,
+  "eqeqeq"        : true,
+  "forin"         : true,
+  "immed"         : true,
+  "indent"        : 2,
+  "latedef"       : true,
+  "newcap"        : true,
+  "noarg"         : true,
+  "noempty"       : true,
+  "quotmark"      : "single",
+  "undef"         : true,
+  "unused"        : true,
+  "strict"        : true,
+  "trailing"      : true,
+
+  "smarttabs"     : true,
+
+  "node"          : true,
+
+  "expr"          : true
+}
