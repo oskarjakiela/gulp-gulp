@@ -1,4 +1,4 @@
-gulp-gulp
+gulp-gulp [![NPM version][npm-image]][npm-url]
 =========
 
 > A [gulp](https://github.com/gulpjs/gulp) plugin to run other gulps.
@@ -34,3 +34,7 @@ gulp gulp
 ## License
 
 [MIT License](http://en.wikipedia.org/wiki/MIT_License)
+
+
+[npm-url]: https://npmjs.org/package/gulp-gulp
+[npm-image]: https://badge.fury.io/js/gulp-gulp.png
