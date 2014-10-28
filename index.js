@@ -10,24 +10,46 @@ var plugin = {
 };
 
 module.exports = function() {
-  process.env.PATH += ':' + path.join(__dirname, 'node_modules', '.bin');
+  var isWin = /^win/.test(process.platform);
+  var gulpPath = path.join(__dirname, '..', '..', 'node_modules', '.bin');
+
+  if (isWin) {
+    process.env.Path += ';' + gulpPath;
+  } else {
+    process.env.PATH += ':' + gulpPath;
+  }
 
   return map(function(file, cb) {
-      var gulpGulp = spawn('gulp', [
+    var gulpGulp;
+
+    if (isWin) {
+      gulpGulp = spawn('cmd', [
+        '/s',
+        '/c',
+        'gulp.cmd',
         '--gulpfile=' + file.path
+      ], {
+        env: process.env,
+        stdio: 'inherit',
+        windowsVerbatimArguments: true 
+      });
+    } else {
+      gulpGulp = spawn('gulp', [
+      '--gulpfile=' + file.path
       ], {
         env: process.env,
         stdio: 'inherit'
       });
+    }
 
-      gulpGulp.on('close', function(code) {
-        var error;
+    gulpGulp.on('close', function(code) {
+      var error;
 
-        if (code && 65 !== code) {
-          error = new gutil.PluginError(plugin.name, plugin.name + ': returned ' + code);
-        }
+      if (code && 65 !== code) {
+        error = new gutil.PluginError(plugin.name, plugin.name + ': returned ' + code);
+      }
 
-        cb(error, file);
-      });
+      cb(error, file);
+    });
    });
 };
