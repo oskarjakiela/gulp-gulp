@@ -9,9 +9,11 @@ var plugin = {
   name: 'gulp-gulp'
 };
 
-module.exports = function() {
+module.exports = function(task) {
   var isWin = /^win/.test(process.platform);
   var gulpPath = path.join(__dirname, '..', '..', 'node_modules', '.bin');
+
+  task = typeof task === 'undefined' ? 'default' : task;
 
   if (isWin) {
     process.env.Path += ';' + gulpPath;
@@ -35,7 +37,8 @@ module.exports = function() {
       });
     } else {
       gulpGulp = spawn('gulp', [
-      '--gulpfile=' + file.path
+        '--gulpfile=' + file.path,
+        task
       ], {
         env: process.env,
         stdio: 'inherit'
@@ -51,5 +54,5 @@ module.exports = function() {
 
       cb(error, file);
     });
-   });
+  });
 };
