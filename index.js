@@ -29,7 +29,8 @@ module.exports = function(task) {
         '/s',
         '/c',
         'gulp.cmd',
-        '--gulpfile=' + file.path
+        '--gulpfile=' + file.path,
+        task
       ], {
         env: process.env,
         stdio: 'inherit',
