@@ -31,6 +31,12 @@ Finally, fire gulp task:
 gulp gulp
 ```
 
+If you have following (clean, move, run) sub-gulp tasks you can run like this
+
+```shell
+gulp gulp --clean move run
+```
+
 ## License
 
 [MIT License](http://en.wikipedia.org/wiki/MIT_License)
