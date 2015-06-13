@@ -9,19 +9,23 @@ var plugin = {
   name: 'gulp-gulp'
 };
 
-module.exports = function(task) {
+module.exports = function () {
   var isWin = /^win/.test(process.platform);
   var gulpPath = path.join(__dirname, '..', '..', 'node_modules', '.bin');
 
-  task = typeof task === 'undefined' ? 'default' : task;
+  var args = process.argv.slice(3, process.argv.length)
+    .reduce(function (previousValue, currentValue) {
+      return previousValue.concat(currentValue.replace('--', '')).concat(' ');
+    }, '');
 
+  console.log('args', args);
   if (isWin) {
     process.env.Path += ';' + gulpPath;
   } else {
     process.env.PATH += ':' + gulpPath;
   }
 
-  return map(function(file, cb) {
+  return map(function (file, cb) {
     var gulpGulp;
 
     if (isWin) {
@@ -30,23 +34,23 @@ module.exports = function(task) {
         '/c',
         'gulp.cmd',
         '--gulpfile=' + file.path,
-        task
+        args
       ], {
-        env: process.env,
-        stdio: 'inherit',
-        windowsVerbatimArguments: true 
+        env:                      process.env,
+        stdio:                    'inherit',
+        windowsVerbatimArguments: true
       });
     } else {
       gulpGulp = spawn('gulp', [
         '--gulpfile=' + file.path,
-        task
+        args
       ], {
-        env: process.env,
+        env:   process.env,
         stdio: 'inherit'
       });
     }
 
-    gulpGulp.on('close', function(code) {
+    gulpGulp.on('close', function (code) {
       var error;
 
       if (code && 65 !== code) {
