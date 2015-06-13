@@ -1,6 +1,6 @@
 {
   "name": "gulp-gulp",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "A gulp plugin to run other gulps.",
   "main": "index.js",
   "scripts": {
