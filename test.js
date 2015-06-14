@@ -162,4 +162,35 @@ describe('gulp-gulp', function () {
     })
   });
 
+  describe('when passes tasks through plugin options', function() {
+    beforeEach(function() {
+      gulpGulp = require(gulpGulpPath);
+
+      spawn.sequence.add(function (cb) {
+        this.emit('close');
+        return cb(1);
+      });
+    });
+
+    it('should run gulp with sub-tasks', function(done) {
+      stream = gulpGulp({
+        tasks: ['watch']
+      });
+
+      stream.write(new gutil.File({
+        path: './test/fixtures/gulpfile.js'
+      }));
+
+      stream.on('end', function() {
+        assert.deepEqual([
+          '--gulpfile=./test/fixtures/gulpfile.js',
+          'watch'
+        ], spawn.calls[0].args);
+
+        done();
+      })
+
+      stream.end();
+    })
+  });
 });

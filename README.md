@@ -31,7 +31,18 @@ Finally, fire gulp task:
 gulp gulp
 ```
 
-If you have following (clean, move, run) sub-gulp tasks you can run like this
+If you have following (clean, move, run) sub-gulp tasks you can run like: this
+
+```javascript
+gulp.task('gulp', function() {
+  return gulp.src('./**/*/gulpfile.js')
+    .pipe(gulpGulp({
+      tasks: ['clean', 'move', 'run']
+    }));
+});
+```
+
+Or directly through shell:
 
 ```shell
 gulp gulp --tasks clean move run
