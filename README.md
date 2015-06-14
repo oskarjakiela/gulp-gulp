@@ -1,4 +1,4 @@
-gulp-gulp [![NPM version][npm-image]][npm-url]
+gulp-gulp [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]] [travis-url]
 =========
 
 > A [gulp](https://github.com/gulpjs/gulp) plugin to run other gulps.
@@ -44,3 +44,5 @@ gulp gulp --clean move run
 
 [npm-url]: https://npmjs.org/package/gulp-gulp
 [npm-image]: https://badge.fury.io/js/gulp-gulp.png
+[travis-url]:https://travis-ci.org/oskarjakiela/gulp-gulp
+[travis-image]: https://travis-ci.org/oskarjakiela/gulp-gulp.svg?branch=master
