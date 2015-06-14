@@ -13,10 +13,12 @@ module.exports = function () {
   var isWin = /^win/.test(process.platform);
   var gulpPath = path.join(__dirname, 'node_modules', '.bin');
 
-  var args = process.argv.slice(3, process.argv.length)
-    .reduce(function (previousValue, currentValue) {
-      return previousValue.concat(currentValue.replace('--', '')).concat(' ');
-    }, '');
+  var tasks = [];
+  var tasksArgv = process.argv.indexOf('--tasks');
+
+  if (tasksArgv > -1) {
+    tasks = process.argv.slice(tasksArgv + 1, process.argv.length);
+  }
 
   if (isWin) {
     process.env.Path += ';' + gulpPath;
@@ -27,27 +29,28 @@ module.exports = function () {
   return map(function (file, cb) {
     var gulpGulp;
 
+    var command = 'gulp';
+    var args = [
+      '--gulpfile=' + file.path,
+    ].concat(tasks);
+
+    var opts = {
+      env:   process.env,
+      stdio: 'inherit'
+    }
+
     if (isWin) {
-      gulpGulp = spawn('cmd', [
+      command = 'cmd';
+      args = [
         '/s',
         '/c',
-        'gulp.cmd',
-        '--gulpfile=' + file.path,
-        args
-      ], {
-        env:                      process.env,
-        stdio:                    'inherit',
-        windowsVerbatimArguments: true
-      });
-    } else {
-      gulpGulp = spawn('gulp', [
-        '--gulpfile=' + file.path,
-        args
-      ], {
-        env:   process.env,
-        stdio: 'inherit'
-      });
+        'gulp.cmd'
+      ].concat(args);
+
+      opts.windowsVerbatimArguments = true;
     }
+
+    gulpGulp = spawn(command, args, opts);
 
     gulpGulp.on('close', function (code) {
       var error;

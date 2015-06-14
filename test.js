@@ -121,4 +121,45 @@ describe('gulp-gulp', function () {
     });
   });
 
+  describe('when passes tasks through cli', function() {
+    var mockProcess = {
+      platform: '',
+      env: {
+        PATH: '/usr/bin'
+      }
+    };
+
+    beforeEach(function() {
+      gulpGulp = rewire(gulpGulpPath);
+
+
+      spawn.sequence.add(function (cb) {
+        this.emit('close');
+        return cb(1);
+      });
+    });
+
+    it('should run gulp with sub-tasks', function(done) {
+      mockProcess.argv = ['node', 'gulp', 'gulp', '--tasks', 'watch']
+
+      gulpGulp.__set__('process', mockProcess);
+
+      stream = gulpGulp();
+      stream.write(new gutil.File({
+        path: './test/fixtures/gulpfile.js'
+      }));
+
+      stream.on('end', function() {
+        assert.deepEqual([
+          '--gulpfile=./test/fixtures/gulpfile.js',
+          'watch'
+        ], spawn.calls[0].args);
+
+        done();
+      })
+
+      stream.end();
+    })
+  });
+
 });
