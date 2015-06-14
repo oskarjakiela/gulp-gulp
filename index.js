@@ -11,7 +11,7 @@ var plugin = {
 
 module.exports = function () {
   var isWin = /^win/.test(process.platform);
-  var gulpPath = path.join(__dirname, '..', '..', 'node_modules', '.bin');
+  var gulpPath = path.join(__dirname, 'node_modules', '.bin');
 
   var args = process.argv.slice(3, process.argv.length)
     .reduce(function (previousValue, currentValue) {

@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/oskarjakiela/gulp-gulp",
   "dependencies": {
+    "gulp": "^3.9.0",
     "gulp-util": "^3.0.1",
     "map-stream": "^0.1.0"
   }
