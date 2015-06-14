@@ -18,7 +18,6 @@ module.exports = function () {
       return previousValue.concat(currentValue.replace('--', '')).concat(' ');
     }, '');
 
-  console.log('args', args);
   if (isWin) {
     process.env.Path += ';' + gulpPath;
   } else {
