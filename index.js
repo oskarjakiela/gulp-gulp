@@ -58,7 +58,7 @@ module.exports = function(options) {
       var error;
 
       if (code && 65 !== code) {
-        error = new gutil.PluginError(plugin.name, plugin.name + ': returned ' + code);
+        error = new gutil.PluginError(plugin.name, file.path + ': returned ' + code);
       }
 
       cb(error, file);
